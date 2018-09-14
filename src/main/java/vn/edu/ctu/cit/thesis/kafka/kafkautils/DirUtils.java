@@ -30,4 +30,7 @@ public class DirUtils {
         });
         return cache;
     }
+    public static String getFileNameFormPatch(String fullpath){
+        return fullpath.substring(fullpath.lastIndexOf("\\")+1);
+    }
 }

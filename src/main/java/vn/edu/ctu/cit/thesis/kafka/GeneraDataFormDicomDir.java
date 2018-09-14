@@ -48,7 +48,7 @@ public class GeneraDataFormDicomDir implements Runnable {
         ArrayList<String> filepaths = DirUtils.getListFileName(dirpath);
         for(String fullpath:filepaths){
             HemorrhageFeatureData result=DicomExtract.getInstance().creatFeature(fullpath);
-            producer.send(new ProducerRecord<String, String>(topic,fullpath,result.toJson()),new CallBackProducer(topic,fullpath));
+            producer.send(new ProducerRecord<String, String>(topic,DirUtils.getFileNameFormPatch(fullpath),result.toJson()),new CallBackProducer(topic,fullpath));
         }
     }
 }
