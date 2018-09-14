@@ -206,22 +206,29 @@ public class HemorrhageFeatureData {
 
     @Override
     public String toString() {
-        return "{" +
-                "Area:" + Area +
-                ", CentroidX:" + String.format("%.4f",CentroidX)+
-                ", CentroidY:" + String.format("%.4f",CentroidY) +
-                ", Perimeter:" + String.format("%.4f",Perimeter) +
-                ", DistanceWithSkull:" +String.format("%.4f",DistanceWithSkull) +
-                ", EquivDiameter:" + String.format("%.4f",EquivDiameter) +
-                ", AreaBoudingbox:" + String.format("%.4f",AreaBoudingbox) +
-                ", Solidity:" + String.format("%.4f",Solidity) +
-                ", Extent:" + String.format("%.4f",Extent) +
-                ", Eccentricity:" + String.format("%.4f",Eccentricity) +
-                ", MajorAxisLength:" + String.format("%.4f",MajorAxisLength) +
-                ", MinorAxisLength:" + String.format("%.4f",MinorAxisLength) +
-                ", Orientation:" + String.format("%.4f",Orientation) +
-                '}';
+        return " "+PatientID +"," + PatientName+"," +
+                PatientAge +"," +
+               PatientSex +"," +
+                  InstitutionName +"," +
+              institutionAddress +"," +
+                  AccessionNumber +"," +
+                 Manufacturer +"," +
+                 Modality +"," +
+                Area +"," +
+                CentroidX +"," +
+                CentroidY+"," +
+                Perimeter +"," +
+                 DistanceWithSkull +"," +
+                EquivDiameter +"," +
+                 AreaBoudingbox +"," +
+                 Solidity +"," +
+                Extent +"," +
+                Eccentricity +"," +
+                 MajorAxisLength +"," +
+                  MinorAxisLength +"," +
+               Orientation+",";
     }
+
     public String toJson(){
         return new Gson().toJson(this);
     }
