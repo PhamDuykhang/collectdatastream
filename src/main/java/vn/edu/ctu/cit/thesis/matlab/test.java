@@ -3,9 +3,9 @@ package vn.edu.ctu.cit.thesis.matlab;
 
 
 
-import DetectBrainHemorrhage.BrainHemorrhageDetection;
-import com.mathworks.toolbox.javabuilder.MWException;
 
+import com.mathworks.toolbox.javabuilder.MWException;
+import detectbrainhemorrhage.BrainHemorrhageExtraction;
 
 
 import java.time.LocalTime;
@@ -13,7 +13,7 @@ import java.time.LocalTime;
 public class test {
     public static void main(String[] args) {
         System.out.println("buoc 1");
-        BrainHemorrhageDetection mat;
+        BrainHemorrhageExtraction mat;
         System.out.println("Buoc 1 hoan thanh tai "+LocalTime.now().toString());
         System.out.println("buoc 2");
         String patchfile= "C:/Users/Asus/Desktop/Newfolder/7-I320_2";
@@ -24,10 +24,10 @@ public class test {
         System.out.println("Buoc 3 hoan thanh tai "+LocalTime.now().toString());
         System.out.println("buoc 4");
         try{
-            mat = new BrainHemorrhageDetection();
+            mat = new BrainHemorrhageExtraction();
             System.out.println("Buoc 4 hoan thanh tai "+LocalTime.now().toString());
             System.out.println("buoc 5");
-            res = mat.detectBrainHemorrhage(2, patchfile);
+            res = mat.ExtractFeature(2, patchfile);
             System.out.println("Buoc 5 hoan thanh tai "+LocalTime.now().toString());
             System.out.println("chay xong pt");
             System.out.println(res[0]);

@@ -1,18 +1,19 @@
 package vn.edu.ctu.cit.thesis.matlab;
 
-import DetectBrainHemorrhage.BrainHemorrhageDetection;
-import com.mathworks.toolbox.javabuilder.MWException;
 
+import com.mathworks.toolbox.javabuilder.MWException;
+import detectbrainhemorrhage.BrainHemorrhageExtraction;
+import vn.edu.ctu.cit.thesis.kafka.kafkautils.DirUtils;
 
 
 import java.util.Objects;
 
 public class DicomExtract {
-    private BrainHemorrhageDetection extraction;
+    private BrainHemorrhageExtraction extraction;
     private Object[] result;
     private static  DicomExtract instance;
     private DicomExtract() throws MWException {
-        extraction = new BrainHemorrhageDetection();
+        extraction = new BrainHemorrhageExtraction();
         result = null;
     }
     public static synchronized DicomExtract getInstance () throws MWException {
@@ -21,11 +22,10 @@ public class DicomExtract {
         }
         return instance;
     }
-    public HemorrhageFeatureData creatFeature(String dicomfilepath) throws MWException {
-        result = extraction.detectBrainHemorrhage(2,dicomfilepath);
+    public HemorrhageFeatureData creatFeature(String dicomfilepath,int numberreduce) throws MWException {
+        result = extraction.ExtractFeature(2,dicomfilepath);
         ResultUtils resultUtils= new ResultUtils();
-//        System.out.println("Dicomexxtract"+result[0].toString());
-        return resultUtils.NomalizeResult(result)
-                .toHemorrhageFeature();
+        return resultUtils.NomalizeResult(DirUtils.getFileNameFormPatch(dicomfilepath),result)
+                .toHemorrhageFeature(numberreduce);
     }
 }

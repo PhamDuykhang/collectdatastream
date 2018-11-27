@@ -3,6 +3,7 @@ package vn.edu.ctu.cit.thesis.matlab;
 import com.google.gson.Gson;
 
 public class HemorrhageFeatureData {
+    private String fileName;
     private String PatientID; //id benh nhan
     private String PatientName; // ten benh nhan
     private String PatientAge; // tuoi benh nhan
@@ -17,16 +18,79 @@ public class HemorrhageFeatureData {
     private float CentroidY;
     private float Perimeter;
     private float DistanceWithSkull;
-    private float EquivDiameter;
-    private float AreaBoudingbox;
+    private float Diameter;
     private float Solidity;
+    private float ConvexArea;
+    private float BBULX;
+    private float BBULY;
+    private float BBWith;
+    private float BBHeight;
+    private float FilledArea;
     private float Extent;
     private float Eccentricity;
     private float MajorAxisLength;
     private float MinorAxisLength;
     private float Orientation;
+    private int Label;
 
-    public HemorrhageFeatureData() {}
+    public int getLabel() {
+        return Label;
+    }
+
+    public void setLabel(int label) {
+        Label = label;
+    }
+
+    public float getConvexArea() {
+        return ConvexArea;
+    }
+
+    public void setConvexArea(float convexArea) {
+        ConvexArea = convexArea;
+    }
+
+    public float getBBULX() {
+        return BBULX;
+    }
+
+    public void setBBULX(float BBULX) {
+        this.BBULX = BBULX;
+    }
+
+    public float getBBULY() {
+        return BBULY;
+    }
+
+    public void setBBULY(float BBULY) {
+        this.BBULY = BBULY;
+    }
+
+    public float getBBWith() {
+        return BBWith;
+    }
+
+    public void setBBWith(float BBWith) {
+        this.BBWith = BBWith;
+    }
+
+    public float getBBHeight() {
+        return BBHeight;
+    }
+
+    public void setBBHeight(float BBHeight) {
+        this.BBHeight = BBHeight;
+    }
+
+    public float getFilledArea() {
+        return FilledArea;
+    }
+
+    public void setFilledArea(float filledArea) {
+        FilledArea = filledArea;
+    }
+
+    public HemorrhageFeatureData() {
+    }
 
     public float getArea() {
         return Area;
@@ -44,6 +108,14 @@ public class HemorrhageFeatureData {
         CentroidX = centroidX;
     }
 
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
     public float getCentroidY() {
         return CentroidY;
     }
@@ -57,7 +129,7 @@ public class HemorrhageFeatureData {
     }
 
     public void setPerimeter(float perimeter) {
-        Perimeter = perimeter;
+        Perimeter = perimeter*2;
     }
 
     public float getDistanceWithSkull() {
@@ -68,20 +140,12 @@ public class HemorrhageFeatureData {
         DistanceWithSkull = distanceWithSkull;
     }
 
-    public float getEquivDiameter() {
-        return EquivDiameter;
+    public float getDiameter() {
+        return Diameter;
     }
 
-    public void setEquivDiameter(float equivDiameter) {
-        EquivDiameter = equivDiameter;
-    }
-
-    public float getAreaBoudingbox() {
-        return AreaBoudingbox;
-    }
-
-    public void setAreaBoudingbox(float areaBoudingbox) {
-        AreaBoudingbox = areaBoudingbox;
+    public void setDiameter(float diameter) {
+        Diameter = diameter*2;
     }
 
     public float getSolidity() {
@@ -153,7 +217,7 @@ public class HemorrhageFeatureData {
     }
 
     public void setPatientAge(String patientAge) {
-        PatientAge = patientAge.replaceAll("Y","");
+        PatientAge = patientAge.replaceAll("Y", "");
     }
 
     public String getPatientSex() {
@@ -206,30 +270,66 @@ public class HemorrhageFeatureData {
 
     @Override
     public String toString() {
-        return " "+PatientID +"," + PatientName+"," +
-                PatientAge +"," +
-               PatientSex +"," +
-                  InstitutionName +"," +
-              institutionAddress +"," +
-                  AccessionNumber +"," +
-                 Manufacturer +"," +
-                 Modality +"," +
-                Area +"," +
-                CentroidX +"," +
-                CentroidY+"," +
-                Perimeter +"," +
-                 DistanceWithSkull +"," +
-                EquivDiameter +"," +
-                 AreaBoudingbox +"," +
-                 Solidity +"," +
-                Extent +"," +
-                Eccentricity +"," +
-                 MajorAxisLength +"," +
-                  MinorAxisLength +"," +
-               Orientation+",";
+        return  "\"" + fileName + "\"," +
+                "\"" + PatientID + "\"," +
+                "\"" + PatientName + "\"," +
+                "\"" + PatientAge + "\"," +
+                "\"" + PatientSex + "\"," +
+                "\"" + InstitutionName + "\"," +
+                "\"" + institutionAddress + "\"," +
+                "\"" + AccessionNumber + "\"," +
+                "\"" + Manufacturer + "\"," +
+                "\"" + Modality + "\"," +
+                String.format("%.5f", Area) + "," +
+                String.format("%.5f", CentroidX) + "," +
+                String.format("%.5f", CentroidY) + "," +
+                String.format("%.5f", Perimeter) + "," +
+                String.format("%.5f", DistanceWithSkull) + "," +
+                String.format("%.5f", Diameter) + "," +
+                String.format("%.5f", Solidity) + "," +
+                String.format("%.5f", ConvexArea) + "," +
+                String.format("%.5f", BBULX) + "," +
+                String.format("%.5f", BBULY) + "," +
+                String.format("%.5f", BBWith) + "," +
+                String.format("%.5f", BBHeight) + "," +
+                String.format("%.5f", FilledArea) + "," +
+                String.format("%.5f", Extent) + "," +
+                String.format("%.5f", Eccentricity) + "," +
+                String.format("%.5f", MajorAxisLength) + "," +
+                String.format("%.5f", MinorAxisLength) + "," +
+                String.format("%.5f", Orientation);
     }
-
-    public String toJson(){
+    public String toCsv() {
+        return  fileName + "," +
+                PatientID + "," +
+                 PatientName + "," +
+                 PatientAge + "," +
+                 PatientSex + "," +
+                InstitutionName + "," +
+                institutionAddress + "," +
+                AccessionNumber + "," +
+                Manufacturer + "," +
+                 Modality + "," +
+                String.format("%.5f", Area) + "," +
+                String.format("%.5f", CentroidX) + "," +
+                String.format("%.5f", CentroidY) + "," +
+                String.format("%.5f", Perimeter) + "," +
+                String.format("%.5f", DistanceWithSkull) + "," +
+                String.format("%.5f", Diameter) + "," +
+                String.format("%.5f", Solidity) + "," +
+                String.format("%.5f", ConvexArea) + "," +
+                String.format("%.5f", BBULX) + "," +
+                String.format("%.5f", BBULY) + "," +
+                String.format("%.5f", BBWith) + "," +
+                String.format("%.5f", BBHeight) + "," +
+                String.format("%.5f", FilledArea) + "," +
+                String.format("%.5f", Extent) + "," +
+                String.format("%.5f", Eccentricity) + "," +
+                String.format("%.5f", MajorAxisLength) + "," +
+                String.format("%.5f", MinorAxisLength) + "," +
+                String.format("%.5f", Orientation);
+    }
+    public String toJson() {
         return new Gson().toJson(this);
     }
 }

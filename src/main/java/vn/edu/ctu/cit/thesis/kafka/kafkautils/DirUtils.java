@@ -1,9 +1,11 @@
 package vn.edu.ctu.cit.thesis.kafka.kafkautils;
 
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
+
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 public class DirUtils {
     public static ArrayList<String> getListFolder(String parentfolder) throws IOException{
@@ -32,5 +34,36 @@ public class DirUtils {
     }
     public static String getFileNameFormPatch(String fullpath){
         return fullpath.substring(fullpath.lastIndexOf("\\")+1);
+    }
+    public static String getPathWithoutFilename(String fullpath){
+        return fullpath.substring(0,fullpath.lastIndexOf("\\")+1);
+    }
+    private static void copyFileUsingStream(String source, String dest) throws IOException {
+        File sourcef = new File(source);
+        File destf = new File(source);
+        InputStream is = null;
+        OutputStream os = null;
+        try {
+            is = new FileInputStream(sourcef);
+            os = new FileOutputStream(destf);
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = is.read(buffer)) > 0) {
+                os.write(buffer, 0, length);
+            }
+
+        } finally {
+            is.close();
+            os.close();
+        }
+    }
+    public static void moveFile(String source,String dest ){
+        Path sourcep= Paths.get(source);
+        Path destp = Paths.get(dest);
+        try {
+            Files.move(sourcep,destp,REPLACE_EXISTING);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class GeneraDataFormDicomDir implements Runnable {
+    private static String  DICOM_DIRECTORY_OUT_PUT_FILE ="E:/Code IDEA/collectdatastream/dicomdata222.csv";
     private static final Logger logger = Logger.getLogger(GeneraDataFormDicomDir.class);
     private String topic;
     private String dirpath;
@@ -35,7 +36,7 @@ public class GeneraDataFormDicomDir implements Runnable {
             if(Objects.isNull(this.producer)){
                 logger.debug("Producer is null");
             }
-            creatStream(this.topic, this.dirpath, this.producer);
+            creatStreamDicom(this.topic, this.dirpath, this.producer);
         }
         catch (MWException e){
             logger.error(e.getMessage());
@@ -44,11 +45,12 @@ public class GeneraDataFormDicomDir implements Runnable {
             logger.error(ioe.getMessage());
         }
     }
-    private void creatStream (String topic,String dirpath,Producer<String,String> producer) throws IOException,MWException {
+    private void creatStreamDicom(String topic, String dirpath, Producer<String,String> producer) throws IOException,MWException {
+//        FileWriter fileWriter  = new FileWriter(DICOM_DIRECTORY_OUT_PUT_FILE);
         ArrayList<String> filepaths = DirUtils.getListFileName(dirpath);
         for(String fullpath:filepaths){
-            HemorrhageFeatureData result=DicomExtract.getInstance().creatFeature(fullpath);
-            producer.send(new ProducerRecord<String, String>(topic,DirUtils.getFileNameFormPatch(fullpath),result.toJson()),new CallBackProducer(topic,fullpath));
+            HemorrhageFeatureData result=DicomExtract.getInstance().creatFeature(fullpath,10000);
+            producer.send(new ProducerRecord<String, String>(topic,DirUtils.getFileNameFormPatch(fullpath),result.toJson()),new CallBackProducer(topic,fullpath,result.toJson()));
         }
     }
 }

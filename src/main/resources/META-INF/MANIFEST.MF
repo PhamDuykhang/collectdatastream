@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-Main-Class: vn.edu.ctu.cit.thesis.matlab.test
-Class-Path: lib/javabuilder.jar
+Main-Class: vn.edu.ctu.cit.thesis.kafka.CreateStreamJson
+

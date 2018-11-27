@@ -10,7 +10,8 @@ public class test6 {
         try {
             ArrayList<String> files = DirUtils.getListFileName("E:/test fobder/New folder (2)");
             for (String file:files) {
-                System.out.println(DirUtils.getFileNameFormPatch(file));
+                System.out.println(DirUtils.getPathWithoutFilename(file)+"backup\\"+DirUtils.getFileNameFormPatch(file));
+                DirUtils.moveFile(file,DirUtils.getPathWithoutFilename(file)+"backup\\"+DirUtils.getFileNameFormPatch(file));
             }
         } catch (IOException e) {
             e.printStackTrace();
