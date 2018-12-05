@@ -49,24 +49,46 @@ public class ResultUtils {
         cache.setManufacturer(cacheStringPatientInfo[7]);
         cache.setModality(cacheStringPatientInfo[8]);
         //Feature add
-        cache.setArea(Float.valueOf(cacheStringFeature[4])/index);
-        cache.setCentroidX(Float.valueOf(cacheStringFeature[5])/index);
-        cache.setCentroidY(Float.valueOf(cacheStringFeature[6])/index);
-        cache.setPerimeter(Float.valueOf(cacheStringFeature[7])/index);
-        cache.setDistanceWithSkull(Float.valueOf(cacheStringFeature[8])/index);
-        cache.setDiameter(Float.valueOf(cacheStringFeature[9])/index);
-        cache.setSolidity(Float.valueOf(cacheStringFeature[14])/index);
-        cache.setConvexArea(Float.valueOf(cacheStringFeature[15])/index);
-        cache.setBBULX(Float.valueOf(cacheStringFeature[16])/index);
-        cache.setBBULY(Float.valueOf(cacheStringFeature[17])/index);
-        cache.setBBWith(Float.valueOf(cacheStringFeature[18])/index);
-        cache.setBBHeight(Float.valueOf(cacheStringFeature[19])/index);
-        cache.setFilledArea(Float.valueOf(cacheStringFeature[24])/index);
-        cache.setExtent(Float.valueOf(cacheStringFeature[25])/index);
-        cache.setEccentricity(Float.valueOf(cacheStringFeature[26])/index);
-        cache.setMajorAxisLength(Float.valueOf(cacheStringFeature[27])/index);
-        cache.setMinorAxisLength(Float.valueOf(cacheStringFeature[28])/index);
-        cache.setOrientation(Float.valueOf(cacheStringFeature[29])/index);
+        if(Float.valueOf(cacheStringFeature[4]) == 0){
+            cache.setArea(0);
+            cache.setCentroidX(0);
+            cache.setCentroidY(0);
+            cache.setPerimeter(0);
+            cache.setDistanceWithSkull(0);
+            cache.setDiameter(0);
+            cache.setSolidity(0);
+            cache.setConvexArea(0);
+            cache.setBBULX(0);
+            cache.setBBULY(0);
+            cache.setBBWith(0);
+            cache.setBBHeight(0);
+            cache.setFilledArea(0);
+            cache.setExtent(0);
+            cache.setEccentricity(0);
+            cache.setMajorAxisLength(0);
+            cache.setMinorAxisLength(0);
+            cache.setOrientation(0);
+        }
+        else {
+            cache.setArea(Float.valueOf(cacheStringFeature[4]) / index);
+            cache.setCentroidX(Float.valueOf(cacheStringFeature[5]) / index);
+            cache.setCentroidY(Float.valueOf(cacheStringFeature[6]) / index);
+            cache.setPerimeter(Float.valueOf(cacheStringFeature[7]) / index);
+            cache.setDistanceWithSkull(Float.valueOf(cacheStringFeature[8]) / index);
+            cache.setDiameter(Float.valueOf(cacheStringFeature[9]) / index);
+            cache.setSolidity(Float.valueOf(cacheStringFeature[14]) / index);
+            cache.setConvexArea(Float.valueOf(cacheStringFeature[15]) / index);
+            cache.setBBULX(Float.valueOf(cacheStringFeature[16]) / index);
+            cache.setBBULY(Float.valueOf(cacheStringFeature[17]) / index);
+            cache.setBBWith(Float.valueOf(cacheStringFeature[18]) / index);
+            cache.setBBHeight(Float.valueOf(cacheStringFeature[19]) / index);
+            cache.setFilledArea(Float.valueOf(cacheStringFeature[24]) / index);
+            cache.setExtent(Float.valueOf(cacheStringFeature[25]) / index);
+            cache.setEccentricity(Float.valueOf(cacheStringFeature[26]) / index);
+            cache.setMajorAxisLength(Float.valueOf(cacheStringFeature[27]) / index);
+            cache.setMinorAxisLength(Float.valueOf(cacheStringFeature[28]) / index);
+            cache.setOrientation(Float.valueOf(cacheStringFeature[29]) / index);
+        }
         return cache;
     }
 }

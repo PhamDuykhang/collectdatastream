@@ -11,9 +11,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class CreateDataWithLabel {
-    private static final String  DICOM_DIRECTORY ="data/Datae/1-mau tu duoi mang cung";
-    private static final String  DICOM_DIRECTORY_OUT_PUT_FILE ="data/newdicomdata-1.json";
-    private static final int LABEL=1;
+    private static final String  DICOM_DIRECTORY ="data/Datae/4-khong benh";
+    private static final String  DICOM_DIRECTORY_OUT_PUT_FILE ="data/data-co khong benh/newdicomdata-4.json";
+    private static final int LABEL=4;
     public static void main(String[] args) {
         try{
             FileWriter fileWriter  = new FileWriter(DICOM_DIRECTORY_OUT_PUT_FILE);
