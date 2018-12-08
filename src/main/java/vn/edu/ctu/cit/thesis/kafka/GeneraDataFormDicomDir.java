@@ -48,8 +48,10 @@ public class GeneraDataFormDicomDir implements Runnable {
     private void creatStreamDicom(String topic, String dirpath, Producer<String,String> producer) throws IOException,MWException {
 //        FileWriter fileWriter  = new FileWriter(DICOM_DIRECTORY_OUT_PUT_FILE);
         ArrayList<String> filepaths = DirUtils.getListFileName(dirpath);
+        String label = DirUtils.getLabelFromFolderName(dirpath);
         for(String fullpath:filepaths){
             HemorrhageFeatureData result=DicomExtract.getInstance().creatFeature(fullpath,10000);
+            result.setLabel(Integer.valueOf(label));
             producer.send(new ProducerRecord<String, String>(topic,DirUtils.getFileNameFormPatch(fullpath),result.toJson()),new CallBackProducer(topic,fullpath,result.toJson()));
         }
     }

@@ -57,6 +57,10 @@ public class DirUtils {
             os.close();
         }
     }
+    public static String getLabelFromFolderName(String patch){
+         String foldername = patch.substring(patch.lastIndexOf("\\")+1);
+         return foldername.substring(foldername.lastIndexOf("\\")+1,foldername.lastIndexOf("-"));
+    }
     public static void moveFile(String source,String dest ){
         Path sourcep= Paths.get(source);
         Path destp = Paths.get(dest);
